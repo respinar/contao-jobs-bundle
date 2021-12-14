@@ -45,7 +45,7 @@ $GLOBALS['TL_LANG']['tl_jobs']['place'] = ["Place of work", ""];
 $GLOBALS['TL_LANG']['tl_jobs']['department'] = ["Department", ""];
 $GLOBALS['TL_LANG']['tl_jobs']['duties'] = ["Duties", ""];
 $GLOBALS['TL_LANG']['tl_jobs']['qualification'] = ["Required Qualification", ""];
-$GLOBALS['TL_LANG']['tl_jobs']['publish'] = ["Publish", "Make the job item publicly visible on the website."];
+$GLOBALS['TL_LANG']['tl_jobs']['published'] = ["Publish", "Make the job item publicly visible on the website."];
 $GLOBALS['TL_LANG']['tl_jobs']['start'] = ["Start", "If you want to prevent the job item from showing on the website before a certain date/time, you can enter it here. Otherwise leave the field blank."];
 $GLOBALS['TL_LANG']['tl_jobs']['stop'] = ["Stop", "If you want to prevent the job item from showing on the website after a certain date/time, you can enter it here. Otherwise leave the field blank."];
 
