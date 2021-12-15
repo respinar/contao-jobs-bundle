@@ -23,12 +23,17 @@ use Contao\FrontendUser;
 use Contao\ModuleModel;
 use Contao\PageModel;
 use Contao\Template;
+use Contao\FrontendTemplate;
+use Contao\StringUtil;
 use Doctrine\DBAL\Connection;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Respinar\ContaoJobsBundle\Model\JobsModel;
+use Respinar\ContaoJobsBundle\Model\JobsCategoryModel;
+//use Respinar\ContaoJobsBundle\Controller\JobsModuleController;
 
 /**
  * Class JobsListingModuleController
@@ -83,42 +88,53 @@ class JobsListingModuleController extends AbstractFrontendModuleController
      */
     protected function getResponse(Template $template, ModuleModel $model, Request $request): ?Response
     {
-        $userFirstname = 'DUDE';
-        $user = $this->get('security.helper')->getUser();
-        if ($user instanceof FrontendUser)
-        {
-            $userFirstname = $user->firstname;
-        }
 
-        /** @var Session $session */
-        $session = $request->getSession();
-        $feBag = $session->getBag('contao_frontend');
-        $feBag->set('foo', 'bar');
+        $jobs_categories = StringUtil::deserialize($model->jobs_categories);
 
-        /** @var Date $dateAdapter */
-        $dateAdapter = $this->get('contao.framework')->getAdapter(Date::class);
-        $intWeekday = $dateAdapter->parse('w');
-        $translator = $this->get('translator');
-        $strWeekday = $translator->trans('DAYS.' . $intWeekday, [], 'contao_default');
+		$intTotal = JobsModel::countPublishedByPids($jobs_categories);
 
-        $arrGuests = [];
-        $stmt = $this->get('database_connection')
-            ->executeQuery(
-                'SELECT * FROM tl_member WHERE gender=? ORDER BY lastname',
-                ['female']
-            );
-        while (false !== ($objMember = $stmt->fetch(\PDO::FETCH_OBJ)))
-        {
-            $arrGuests[] = $objMember->firstname;
-        }
+        $arrOptions['order'] = 'id';
 
-        $template->helloTitle = sprintf(
-            'Hi %s, and welcome to the "Hello World Module". Today is %s.',
-            $userFirstname, $strWeekday
-        );
-
-        $template->helloText = 'Our guests today are: ' . implode(', ', $arrGuests);
+        $objJobs = JobsModel::findPublishedByPids($jobs_categories,0,0,$arrOptions);
+        
+        // No items found
+		if ($objJobs !== null)
+		{
+			$template->jobs = $this->parseJobs($objJobs,$model->jobs_template);
+		}        
 
         return $template->getResponse();
+    }
+
+    protected function parseJobs($objJobs, $job_template) {
+
+        $limit = $objJobs->count();
+
+		if ($limit < 1)
+		{
+			return array();
+		}
+
+		$count = 0;
+		$arrJobs = array();
+
+		while ($objJobs->next())
+		{
+			$arrJobs[] = $this->parseJob($objJobs, $job_template, $count);
+		}
+
+		return $arrJobs;
+
+    }
+
+    protected function parseJob($objJob, $job_template, $intCount=0)
+    {
+
+        $objTemplate = new FrontendTemplate($job_template);
+
+		$objTemplate->setData($objJob->row());	
+
+		return $objTemplate->parse();
+
     }
 }
