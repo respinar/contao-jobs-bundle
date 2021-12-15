@@ -13,6 +13,7 @@ declare(strict_types=1);
  */
 
 use Respinar\ContaoJobsBundle\Controller\FrontendModule\JobsListingModuleController;
+use Respinar\ContaoJobsBundle\Controller\FrontendModule\JobsDetailModuleController;
 
 /**
  * Backend modules
@@ -20,9 +21,11 @@ use Respinar\ContaoJobsBundle\Controller\FrontendModule\JobsListingModuleControl
 $GLOBALS['TL_LANG']['MOD']['jobs_modules'] = 'Jobs';
 $GLOBALS['TL_LANG']['MOD']['jobs_list'] = ['Job Positions', 'Manage available Jobs'];
 
+
 /**
  * Frontend modules
  */
 $GLOBALS['TL_LANG']['FMD']['jobs_modules'] = 'Jobs';
 $GLOBALS['TL_LANG']['FMD'][JobsListingModuleController::TYPE] = ['Jobs List', 'Show available jobs as a list'];
+$GLOBALS['TL_LANG']['FMD'][JobsDetailModuleController::TYPE] = ['Job Detail', 'Show Detail of job'];
 
