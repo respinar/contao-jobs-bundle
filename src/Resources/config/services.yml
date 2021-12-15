@@ -9,5 +9,13 @@ services:
         # Since Symfony 5 the container has to be set manually
         calls:
             - [ setContainer, [ '@Psr\Container\ContainerInterface' ] ]
+
+    Respinar\ContaoJobsBundle\Controller\FrontendModule\JobsDetailModuleController:
+        tags:
+            - { name: container.service_subscriber }
+        public: true
+        # Since Symfony 5 the container has to be set manually
+        calls:
+            - [ setContainer, [ '@Psr\Container\ContainerInterface' ] ]
     
 
