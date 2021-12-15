@@ -1,0 +1,11 @@
+<div class="job_full">
+    <h1><?= $this->title; ?></h1>
+    <p>Gender: <?= $this->gender; ?></p>
+    <p>Type: <?= $this->type; ?></p>
+    <p>Experience: <?= $this->experience; ?></p>
+    <p>Salary: <?= $this->salary; ?></p>
+    <p>Place: <?= $this->place; ?></p>
+    <p>Department: <?= $this->department; ?></p>
+    <p>Qualification: <?= $this->qualification; ?></p>
+    <p>Duties: <?= $this->duties; ?></p>  
+</div>
