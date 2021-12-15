@@ -2,7 +2,12 @@
 
 <?php $this->block('content'); ?>
 
-    <h3><?= $this->helloTitle ?></h3>
-    <p><?= $this->helloText ?></p>
+  <?php if (empty($this->jobs)): ?>
+    <p class="empty"><?= $this->empty; ?></p>
+  <?php else: ?>
+    <div class="job_list">
+      <?php echo implode('', $this->jobs); ?>
+  </div>
+  <?php endif; ?>
 
 <?php $this->endblock(); ?>
