@@ -36,6 +36,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 use Respinar\ContaoJobsBundle\Model\JobsModel;
 use Respinar\ContaoJobsBundle\Model\JobsCategoryModel;
 use Respinar\ContaoJobsBundle\Controller\JobsController;
+use Contao\CoreBundle\Routing\ResponseContext\HtmlHeadBag\HtmlHeadBag;
 
 /**
  * Class JobsDetailModuleController
@@ -116,6 +117,7 @@ class JobsDetailModuleController extends AbstractFrontendModuleController
         else
         {   
             $template->job = JobsController::parseJob($objJob,$model->jobs_template);
+
         }
 
         return $template->getResponse();
