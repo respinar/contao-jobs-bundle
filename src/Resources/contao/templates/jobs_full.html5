@@ -1,22 +1,20 @@
 <div class="job_full">
     <h1><?= $this->title; ?></h1>
     <div class="condition">
-        <span class="gender">Gender: <?= $this->gender; ?></span>
-        <span class="type">Type: <?= $this->type; ?></span>        
-    </div>
-    <div class="details">
-        <span class="experience">Experience: <?= $this->experience; ?></span>
-        <span class="salary">Salary: <?= $this->salary; ?></span>
-        <span class="place">Place: <?= $this->place; ?></span>
-        <span class="department">Department: <?= $this->department; ?></span>
-    </div>    
-    
+        <h3><?= $this->txt_condition; ?></h3>
+        <span class="gender"><?= $this->txt_gender; ?>: <?= $this->gender; ?></span>
+        <span class="type"><?= $this->txt_type; ?>: <?= $this->type; ?></span>
+        <span class="experience"><?= $this->txt_experience; ?>: <?= $this->experience; ?></span>
+        <span class="salary"><?= $this->txt_salary; ?>: <?= $this->salary; ?></span>
+        <span class="place"><?= $this->txt_place; ?>: <?= $this->place; ?></span>
+        <span class="department"><?= $this->txt_department; ?>: <?= $this->department; ?></span>    
+    </div>     
     <div class="wualification">
-        <h3>Qualification</h3>
+        <h3><?= $this->txt_qualification; ?></h3>
         <p><?= $this->qualification; ?></p>
     </div>
     <div class="duties">
-        <h3>Duties</h3>
-        <p><?= $this->duties; ?></p>  
+        <h3><?= $this->txt_duties; ?></h3>
+        <p><?= $this->duties; ?></p>
     </div>    
 </div>

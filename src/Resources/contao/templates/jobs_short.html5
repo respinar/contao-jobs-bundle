@@ -1,8 +1,8 @@
 <div class="job_short">
     <h3><?= $this->title; ?></h3>    
     <div class="condition">
-        <span class="gender">Gender: <?= $this->gender; ?></span>
-        <span class="type">Type: <?= $this->type; ?></span>
+        <span class="gender"><?= $this->txt_gender; ?>: <?= $this->gender; ?></span>
+        <span class="type"><?= $this->txt_type; ?>: <?= $this->type; ?></span>
     </div>
-    <?= $this->link; ?>
+    <div class="detail_link"><?= $this->link; ?></div>    
 </div>
