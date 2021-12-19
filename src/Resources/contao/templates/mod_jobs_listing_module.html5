@@ -5,7 +5,7 @@
   <?php if (empty($this->jobs)): ?>
     <p class="empty"><?= $this->empty; ?></p>
   <?php else: ?>
-    <div class="job_list">
+    <div class="job_list <?= $this->jobs_list_Class; ?>">
       <?php echo implode('', $this->jobs); ?>
   </div>
   <?php endif; ?>
