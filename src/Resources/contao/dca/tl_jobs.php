@@ -15,6 +15,7 @@ declare(strict_types=1);
 use Contao\Backend;
 use Contao\DC_Table;
 use Contao\Input;
+use Contao\System;
 
 /**
  * Table tl_jobs
@@ -84,7 +85,7 @@ $GLOBALS['TL_DCA']['tl_jobs'] = array(
     // Palettes
     'palettes'    => array(
         'default'      => '{title_legend},title,alias,date,code,description;{general_legend},gender,type,experience,salary,place,department;{particular_legend},qualification,duties;{publish_legend},published,start,stop'
-    ),
+    ),    
     // Fields
     'fields'      => array(
         'id'             => array(
