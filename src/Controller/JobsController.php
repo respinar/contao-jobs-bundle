@@ -26,6 +26,7 @@ use Contao\ModuleModel;
 use Contao\PageModel;
 use Contao\Template;
 use Contao\FrontendTemplate;
+use Contao\System;
 use Doctrine\DBAL\Connection;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -34,6 +35,8 @@ use Symfony\Component\Security\Core\Security;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Respinar\ContaoJobsBundle\Model\JobsModel;
 use Respinar\ContaoJobsBundle\Model\JobsCategoryModel;
+
+//System::loadLanguageFile('tl_jobs');
 
 /**
  * Class JobsController
@@ -77,7 +80,20 @@ class JobsController
 
 		$objTemplate->setData($objJob->row());
 
-		$objTemplate->link = self::generateLink('more detail',$objJob);
+		$objTemplate->link = self::generateLink($GLOBALS['TL_LANG']['MSC']['job_detail'],$objJob, $blnAddArchive);
+
+		$objTemplate->gender = $GLOBALS['TL_LANG']['tl_jobs'][$objJob->gender];
+		$objTemplate->type = $GLOBALS['TL_LANG']['tl_jobs'][$objJob->type];
+
+		$objTemplate->txt_gender = $GLOBALS['TL_LANG']['MSC']['job_gender'];
+		$objTemplate->txt_type = $GLOBALS['TL_LANG']['MSC']['job_type'];
+		$objTemplate->txt_experience = $GLOBALS['TL_LANG']['MSC']['job_experience'];
+		$objTemplate->txt_salary = $GLOBALS['TL_LANG']['MSC']['job_salary'];
+		$objTemplate->txt_place = $GLOBALS['TL_LANG']['MSC']['job_place'];
+		$objTemplate->txt_department = $GLOBALS['TL_LANG']['MSC']['job_department'];
+		$objTemplate->txt_qualification = $GLOBALS['TL_LANG']['MSC']['job_qualification'];
+		$objTemplate->txt_duties = $GLOBALS['TL_LANG']['MSC']['job_duties'];
+		$objTemplate->txt_condition = $GLOBALS['TL_LANG']['MSC']['job_condition'];	
 
 		return $objTemplate->parse();
 
@@ -88,23 +104,15 @@ class JobsController
 	 *
 	 * @param string    $strLink
 	 * @param JobsModel $objJob
-	 * @param boolean   $blnAddArchive
-	 * @param boolean   $blnIsReadMore
+	 * @param boolean   $blnAddArchive	 
 	 *
 	 * @return string
 	 */
-	public static function generateLink($strLink, $objJob, $blnAddArchive=false, $blnIsReadMore=false)
+	public static function generateLink($strLink, $objJob, $blnAddArchive=false)
 	{		
 		$strJobUrl = self::generateJobUrl($objJob, $blnAddArchive);
 
-		return sprintf(
-			'<a href="%s" title="%s"%s>%s%s</a>',
-			$strJobUrl,
-			StringUtil::specialchars(sprintf($strReadMore, $blnIsInternal ? $objJob->title : $strJobUrl), true),
-			($objJob->target && !$blnIsInternal ? ' target="_blank" rel="noreferrer noopener"' : ''),
-			$strLink,
-			($blnIsReadMore && $blnIsInternal ? '<span class="invisible"> ' . $objJob->title . '</span>' : '')
-		);
+		return sprintf('<a href="%s" title="%s"%s>%s</a>', $strJobUrl, $objJob->title, ' rel="referrer opener"', $strLink);
 	}
 
     /**
