@@ -26,8 +26,8 @@ use Contao\Template;
 use Contao\FrontendTemplate;
 use Contao\StringUtil;
 use Contao\Config;
+use Contao\Input;
 use Doctrine\DBAL\Connection;
-use Haste\Input\Input;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -35,7 +35,7 @@ use Symfony\Component\Security\Core\Security;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Respinar\ContaoJobsBundle\Model\JobsModel;
 use Respinar\ContaoJobsBundle\Model\JobsCategoryModel;
-use Respinar\ContaoJobsBundle\Controller\JobsModuleController;
+use Respinar\ContaoJobsBundle\Controller\JobsController;
 
 /**
  * Class JobsDetailModuleController
@@ -105,23 +105,19 @@ class JobsDetailModuleController extends AbstractFrontendModuleController
 
         $jobs_categories = StringUtil::deserialize($model->jobs_categories);
 
-
-        // Get the news item
+        // Get the job item
 		$objJob = JobsModel::findPublishedByParentAndIdOrAlias(Input::get('items'), $jobs_categories);
-    
-        $template->job = $this->parseJob($objJob,$model->jobs_template);
+
+        // The job item does not exist (see #33)
+		if ($objJob === null)
+		{
+			$template->job = "Error!";
+		}
+        else
+        {   
+            $template->job = JobsController::parseJob($objJob,$model->jobs_template);
+        }
 
         return $template->getResponse();
-    }
-
-    public function parseJob($objJob, $job_template)
-    {
-
-        $objTemplate = new FrontendTemplate($job_template);
-
-		$objTemplate->setData($objJob->row());	
-
-		return $objTemplate->parse();
-
     }
 }

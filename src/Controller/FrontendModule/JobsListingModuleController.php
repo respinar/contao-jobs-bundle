@@ -33,7 +33,7 @@ use Symfony\Component\Security\Core\Security;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Respinar\ContaoJobsBundle\Model\JobsModel;
 use Respinar\ContaoJobsBundle\Model\JobsCategoryModel;
-//use Respinar\ContaoJobsBundle\Controller\JobsModuleController;
+use Respinar\ContaoJobsBundle\Controller\JobsController;
 
 /**
  * Class JobsListingModuleController
@@ -100,41 +100,10 @@ class JobsListingModuleController extends AbstractFrontendModuleController
         // No items found
 		if ($objJobs !== null)
 		{
-			$template->jobs = $this->parseJobs($objJobs,$model->jobs_template);
+			$template->jobs = JobsController::parseJobs($objJobs,$model->jobs_template);
 		}        
 
         return $template->getResponse();
     }
 
-    protected function parseJobs($objJobs, $job_template) {
-
-        $limit = $objJobs->count();
-
-		if ($limit < 1)
-		{
-			return array();
-		}
-
-		$count = 0;
-		$arrJobs = array();
-
-		while ($objJobs->next())
-		{
-			$arrJobs[] = $this->parseJob($objJobs, $job_template, $count);
-		}
-
-		return $arrJobs;
-
-    }
-
-    protected function parseJob($objJob, $job_template, $intCount=0)
-    {
-
-        $objTemplate = new FrontendTemplate($job_template);
-
-		$objTemplate->setData($objJob->row());	
-
-		return $objTemplate->parse();
-
-    }
 }
