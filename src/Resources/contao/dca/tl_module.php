@@ -19,7 +19,7 @@ use Respinar\ContaoJobsBundle\Controller\FrontendModule\JobsDetailModuleControll
 /**
  * Frontend modules
  */
-$GLOBALS['TL_DCA']['tl_module']['palettes'][JobsListingModuleController::TYPE] = '{title_legend},name,headline,type;{category_legend},jobs_categories;{template_legend:hide},jobs_sortBy,imgSize,jobs_template,customTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID';
+$GLOBALS['TL_DCA']['tl_module']['palettes'][JobsListingModuleController::TYPE] = '{title_legend},name,headline,type;{category_legend},jobs_categories;{template_legend:hide},jobs_sortBy,jobs_template,jobs_list_Class,customTpl,imgSize;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID';
 $GLOBALS['TL_DCA']['tl_module']['palettes'][JobsDetailModuleController::TYPE]  = '{title_legend},name,headline,type;{category_legend},jobs_categories;{template_legend:hide},jobs_template,customTpl,imgSize;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID';
 
 
@@ -28,7 +28,6 @@ $GLOBALS['TL_DCA']['tl_module']['palettes'][JobsDetailModuleController::TYPE]  =
  */
 $GLOBALS['TL_DCA']['tl_module']['fields']['jobs_categories'] = array
 (
-	'label'                => &$GLOBALS['TL_LANG']['tl_module']['jobs_categories'],
 	'exclude'              => true,
 	'inputType'            => 'checkbox',
 	'foreignKey'           => 'tl_jobs_category.title',
@@ -38,7 +37,6 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['jobs_categories'] = array
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['jobs_sortBy'] = array
 (
-	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['jobs_sortBy'],
 	'default'                 => 'custom',
 	'exclude'                 => true,
 	'inputType'               => 'select',
@@ -50,12 +48,18 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['jobs_sortBy'] = array
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['jobs_template'] = array
 (
-	'label'                => &$GLOBALS['TL_LANG']['tl_module']['jobs_template'],
 	'exclude'              => true,
 	'inputType'            => 'select',
 	'options_callback'     => array('tl_module_jobs', 'getJobsTemplates'),
 	'eval'				   => array('tl_class'=>'w50 clr'),
 	'sql'				   => "varchar(64) NOT NULL default ''",
+);
+$GLOBALS['TL_DCA']['tl_module']['fields']['jobs_list_Class'] = array
+(
+	'exclude'                 => true,
+	'inputType'               => 'text',
+	'eval'                    => array('maxlength'=>128, 'tl_class'=>'w50'),
+	'sql'                     => "varchar(255) NOT NULL default ''"
 );
 
 
