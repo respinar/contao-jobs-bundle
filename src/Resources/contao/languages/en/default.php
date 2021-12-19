@@ -15,7 +15,18 @@ declare(strict_types=1);
 /**
  * Miscelaneous
  */
-//$GLOBALS['TL_LANG']['MSC'][''] = '';
+$GLOBALS['TL_LANG']['MSC']['job_detail'] = "More detail";
+
+$GLOBALS['TL_LANG']['MSC']['job_gender'] = 'Gender';
+$GLOBALS['TL_LANG']['MSC']['job_type'] = 'Type';
+$GLOBALS['TL_LANG']['MSC']['job_experience'] = 'Experience';
+$GLOBALS['TL_LANG']['MSC']['job_salary'] = 'Salary';
+$GLOBALS['TL_LANG']['MSC']['job_place'] = 'Place';
+$GLOBALS['TL_LANG']['MSC']['job_department'] = 'Department';
+$GLOBALS['TL_LANG']['MSC']['job_qualification'] = 'Qualifications';
+$GLOBALS['TL_LANG']['MSC']['job_duties'] = 'Duties';
+$GLOBALS['TL_LANG']['MSC']['job_condition'] = 'Conditions';	
+
 
 /**
  * Errors
