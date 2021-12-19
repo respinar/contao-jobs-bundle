@@ -1,5 +1,7 @@
 <div class="job_short">
     <h3><?= $this->title; ?></h3>
-    <p>Type: <?= $this->type; ?></p>
-    <p>Experience: <?= $this->experience; ?></p>
+    <div class="condition">
+        <span class="gender">Gender: <?= $this->gender; ?></span>
+        <span class="type">Type: <?= $this->type; ?></span>
+    </div>
 </div>
