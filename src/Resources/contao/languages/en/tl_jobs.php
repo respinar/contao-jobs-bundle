@@ -54,8 +54,10 @@ $GLOBALS['TL_LANG']['tl_jobs']['stop'] = ["Stop", "If you want to prevent the jo
 /**
  * References
  */
-$GLOBALS['TL_LANG']['tl_jobs']['firstoption'] = "Erste Option";
-$GLOBALS['TL_LANG']['tl_jobs']['secondoption'] = "Zweite Option";
+$GLOBALS['TL_LANG']['tl_jobs']['male'] = "Male";
+$GLOBALS['TL_LANG']['tl_jobs']['female'] = "Female";
+$GLOBALS['TL_LANG']['tl_jobs']['part-time'] = "Part time";
+$GLOBALS['TL_LANG']['tl_jobs']['full-time'] = "Full time";
 
 /**
  * Buttons
