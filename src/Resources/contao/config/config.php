@@ -12,6 +12,7 @@
 
 use Respinar\ContaoJobsBundle\Model\JobsModel;
 use Respinar\ContaoJobsBundle\Model\JobsCategoryModel;
+use Respinar\ContaoJobsBundle\Model\JobsRequestModel;
 
 
 /**
@@ -20,9 +21,13 @@ use Respinar\ContaoJobsBundle\Model\JobsCategoryModel;
 $GLOBALS['BE_MOD']['jobs_modules']['jobs_list'] = array(
     'tables' => array('tl_jobs_category','tl_jobs')
 );
+$GLOBALS['BE_MOD']['jobs_modules']['jobs_request'] = array(
+    'tables' => array('tl_jobs_request')
+);
 
 /**
  * Models
  */
 $GLOBALS['TL_MODELS']['tl_jobs'] = JobsModel::class;
 $GLOBALS['TL_MODELS']['tl_jobs_category'] = JobsCategoryModel::class;
+$GLOBALS['TL_MODELS']['tl_jobs_request'] = JobsRequestModel::class;
